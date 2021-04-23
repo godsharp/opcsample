@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net40;net5.0;</TargetFrameworks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation" Version="2021.204.23" />
+    <PackageReference Include="GodSharp.Opc.Da.OpcNetApi" Version="2021.204.23" />
+    <PackageReference Include="GodSharp.OpcDa.OpcAutomation" Version="2021.204.23" />
+    <PackageReference Include="GodSharp.OpcDa.OpcNetApi" Version="2021.204.23" />
+  </ItemGroup>
+
+</Project>
