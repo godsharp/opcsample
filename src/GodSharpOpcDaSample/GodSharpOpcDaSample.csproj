@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation" Version="2021.204.23" />
-    <PackageReference Include="GodSharp.Opc.Da.OpcNetApi" Version="2021.204.23" />
     <PackageReference Include="GodSharp.OpcDa.OpcAutomation" Version="2021.204.23" />
     <PackageReference Include="GodSharp.OpcDa.OpcNetApi" Version="2021.204.23" />
   </ItemGroup>

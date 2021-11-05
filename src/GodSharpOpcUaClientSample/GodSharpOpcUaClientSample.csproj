@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodSharp.Opc.Ua.Client" Version="2021.411.3" />
+    <PackageReference Include="GodSharp.Extensions.Opc.Ua.Generator" Version="2021.309.1" />
+    <PackageReference Include="GodSharp.Extensions.Opc.Ua.MsBuild" Version="2021.411.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Mapster" Version="7.2.0" />
+    <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Client.ComplexTypes" Version="1.4.366.38" />
+  </ItemGroup>
+
+</Project>
