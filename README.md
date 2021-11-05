@@ -28,6 +28,12 @@
 ### [GodSharp.Opc.Da](./src/GodSharpOpcDaSample/README.md)
 ### [GodSharp.Opc.Ua.Client](./src/GodSharpOpcUaClientSample/README.md)
 
+## Contact
+
+  > - QQ Qun: 467764581
+  > - QQ: 2267930027
+  > - Email: seayxu@163.com
+
 ## License
 
   **Free!**
