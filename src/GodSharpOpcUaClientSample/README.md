@@ -240,9 +240,9 @@
   Sample code:
 
   ```c#
-  T val = client.Read<T>(node);
+  T val = client.Session.Read<T>(node);
   // or
-  DataValue val = client.Read(node);
+  DataValue val = client.Session.Read(node);
   ```
 
 ### Write Node
@@ -250,7 +250,7 @@
   Sample code:
 
   ```c#
-  var ret = client.Write(node, value);
+  var ret = client.Session.Write(node, value);
   ```
 
 ### Disconnect to Opc Server

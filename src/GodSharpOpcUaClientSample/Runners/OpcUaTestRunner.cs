@@ -1,4 +1,5 @@
-﻿using GodSharp.Extensions.Opc.Ua.Utilities;
+﻿using GodSharp.Extensions.Opc.Ua.Client;
+using GodSharp.Extensions.Opc.Ua.Utilities;
 using GodSharp.Opc.Ua;
 
 using Mapster;
@@ -41,10 +42,10 @@ namespace GodSharpOpcUaClientSample
 
         protected void Run<T>(T value, string node, Func<T, T, bool> compare, Func<T, string> output=null)
         {
-            bool ret = Client.Write(node, value);
+            bool ret = Client.Session.Write(node, value);
             Console.WriteLine($"Write> {node}={(output == null ? value.ToString() : output(value))}:{ret}");
             if (!ret) return;
-            var read = Client.Read<T>(node);
+            var read = Client.Session.Read<T>(node);
             Console.WriteLine($"Read> {node}={(output == null ? read.ToString() : output(read))}:{compare(read, value)}");
             Console.WriteLine(new string('-', 48));
         }
@@ -52,10 +53,10 @@ namespace GodSharpOpcUaClientSample
         protected void RunStruct<T>(T value, string node, Func<T, string> output, Func<T, T, bool> compare) where T : struct
         {
             ExtensionObject v = new ExtensionObject(node, StructConverter.GetBytes(value));
-            bool res = Client.Write(node, v);
+            bool res = Client.Session.Write(node, v);
             Console.WriteLine($"Write> {node}={{{output(value)}}}:{res}");
 
-            var raw = Client.Read(node);
+            var raw = Client.Session.Read(node);
             var val = StructConverter.GetStruct<T>((raw.Value as ExtensionObject).Body as byte[]);
             Console.WriteLine($"Read> {node}={{{output(val)}}}:{compare(value, val)}");
             Console.WriteLine(new string('-', 48));
@@ -63,10 +64,10 @@ namespace GodSharpOpcUaClientSample
 
         protected void RunEncodeableObject<T>(T value, string node, Func<T, string> output, Func<T, T, bool> compare) where T : EncodeableObject
         {
-            bool res = Client.Write(node, value);
+            bool res = Client.Session.Write(node, value);
             Console.WriteLine($"Write> {node}={{{output(value)}}}:{res}");
 
-            var raw = Client.Read(node);
+            var raw = Client.Session.Read(node);
             var val = GetValue<T>(raw, default);
             Console.WriteLine($"Read> {node}={{{output(val)}}}:{compare(value, val)}");
             Console.WriteLine(new string('-', 48));

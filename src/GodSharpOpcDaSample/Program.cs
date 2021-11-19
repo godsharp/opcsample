@@ -1,8 +1,8 @@
-﻿using GodSharp.OpcDa;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GodSharp.OpcDa.Options;
+using GodSharp.Opc.Da.Options;
+using GodSharp.Opc.Da;
 
 namespace GodSharpOpcDaSample
 {
