@@ -8,16 +8,14 @@ using Opc.Ua;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace GodSharpOpcUaClientSample
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Console.WriteLine("Hello GodSharp OpcUa Client Sample!");
             // // register type namespace
@@ -36,18 +34,19 @@ namespace GodSharpOpcUaClientSample
                 //}
             );
             EncodingFactory.Instance.RegisterEncodeableTypes(typeof(UaAnsiVector), typeof(UaAnsiVector));
-            EncodingFactory.Instance.RegisterEncodeableTypes(Assembly.GetEntryAssembly(),Assembly.GetExecutingAssembly());
+            EncodingFactory.Instance.RegisterEncodeableTypes(Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly());
             //EncodeableFactory.GlobalFactory.AddEncodeableTypes(Assembly.GetEntryAssembly());
             EncodeableFactory.GlobalFactory.AddEncodeableType(typeof(UaAnsiVector));
             //EncodeableFactory.GlobalFactory.AddEncodeableType(typeof(ProsysVector));
 
             var url = "opc.tcp://127.0.0.1:53530/OPCUA/SimulationServer";
             url = "opc.tcp://127.0.0.1:48020/";
-            //url = "opc.tcp://127.0.0.1:49320/";
+            url = "opc.tcp://127.0.0.1:49320/";
             //url = "opc.tcp://10.0.0.20:4840";
             //url = "opc.tcp://192.168.250.1:4840";
 
             #region # - Discovery
+
             var _discovery = false;
             if (_discovery)
             {
@@ -88,14 +87,16 @@ namespace GodSharpOpcUaClientSample
                 Console.WriteLine("discovery finished");
                 Console.ReadLine();
             }
-            #endregion
+
+            #endregion # - Discovery
 
             #region 0 - Initial
+
             OpcUaClientBuider buider = new OpcUaClientBuider();
 
-            var cert = new X509Certificate2(@"F:\Temp\.opc\cert\godsharpopcuacert.der", "123456", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.Exportable);
+            //var cert = new X509Certificate2(@"F:\Temp\.opc\cert\godsharpopcuacert.der", "123456", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.Exportable);
 
-            var cert2 = CertificateFactory.CreateCertificateWithPEMPrivateKey(cert, File.ReadAllBytes(@"F:\Temp\.opc\cert\godsharpopcuacert_key.pem"));
+            //var cert2 = CertificateFactory.CreateCertificateWithPEMPrivateKey(cert, File.ReadAllBytes(@"F:\Temp\.opc\cert\godsharpopcuacert_key.pem"));
 
             buider
                 .WithEndpoint(url)
@@ -115,15 +116,19 @@ namespace GodSharpOpcUaClientSample
                         case ClientSessionConnectionState.Connected:
                             Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:connected");
                             break;
+
                         case ClientSessionConnectionState.Reconnecting:
                             Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:reconnecting");
                             break;
+
                         case ClientSessionConnectionState.Disconnecting:
                             Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:disconnecting");
                             break;
+
                         case ClientSessionConnectionState.Disconnected:
                             Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:disconnected");
                             break;
+
                         default:
                             throw new ArgumentOutOfRangeException(nameof(t), t, null);
                     }
@@ -147,16 +152,20 @@ namespace GodSharpOpcUaClientSample
                     }
                 };
             }
-            #endregion
+
+            #endregion 0 - Initial
 
             #region 1 - StartAsync
+
             Console.WriteLine("1 - StartAsync ...");
             bool ret = await client.StartAsync();
             Console.WriteLine($"connect {ret}");
-            #endregion
+
+            #endregion 1 - StartAsync
 
             #region 2 - Browse / BrowseTree
-            var _browse = false;
+
+            var _browse = true;
             if (_browse)
             {
                 Console.WriteLine("2 - Press any key to test Browse...");
@@ -176,7 +185,8 @@ namespace GodSharpOpcUaClientSample
                     }
                 }
 
-                var tree = client.Session.BrowseTree();
+                // if node is too many,you should set `depth` parameter with appropriate value.
+                var tree = client.Session.BrowseTree(depth: 4);
                 //var tree = client.Session.BrowseTree(new NodeId("ns=4;s=Demo.Static"));
                 Browse(tree);
 
@@ -185,13 +195,14 @@ namespace GodSharpOpcUaClientSample
                     level++;
                     foreach (var description in refs)
                     {
-                        Console.WriteLine("{0}+{1}, {2},{3}",
+                        Console.WriteLine("{0}{4}+{1}, {2},{3}",
                             new string('\t', level),
                             //Formatter.FormatAttributeValue(attribute.ValueId.AttributeId, attribute.Value)}
-                            //description.Node.BrowseName, 
+                            //description.Node.BrowseName,
                             description.GetFormatText(),
                             description.Node.NodeClass,
-                            description.Node.NodeId
+                            description.Node.NodeId,
+                            level
                         );
                         if (description.Children != null)
                         {
@@ -200,9 +211,11 @@ namespace GodSharpOpcUaClientSample
                     }
                 }
             }
-            #endregion
+
+            #endregion 2 - Browse / BrowseTree
 
             #region 3 - GetAttributes / GetProperties
+
             var _attributes = false;
             if (_attributes)
             {
@@ -224,9 +237,11 @@ namespace GodSharpOpcUaClientSample
                     }
                 }
             }
-            #endregion
+
+            #endregion 3 - GetAttributes / GetProperties
 
             #region 4 - Subscribe / Unsubscribe
+
             var _subscribe = false;
             if (_subscribe)
             {
@@ -245,7 +260,8 @@ namespace GodSharpOpcUaClientSample
 
                 client.Unsubscribe(sub_name);
             }
-            #endregion
+
+            #endregion 4 - Subscribe / Unsubscribe
 
             Console.WriteLine("5 - Press any key to test read/write ...");
             Console.ReadLine();
