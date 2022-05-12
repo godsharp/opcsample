@@ -80,9 +80,9 @@
   ```c#
   OpcUaClientBuider buider = new OpcUaClientBuider();
 
-  var cert = new X509Certificate2(@".\.opc\cert  \godsharpopcuacert.der", "123456",  X509KeyStorageFlags.MachineKeySet |   X509KeyStorageFlags.Exportable);
+  //var cert = new X509Certificate2(@".\.opc\cert\godsharpopcuacert.der", "123456",  X509KeyStorageFlags.MachineKeySet |   X509KeyStorageFlags.Exportable);
   
-  var cert2 =   CertificateFactory.CreateCertificateWithPEMPrivateKey(cert, File.ReadAllBytes(@".\.opc\cert  \godsharpopcuacert_key.pem"));
+  //var cert2 = CertificateFactory.CreateCertificateWithPEMPrivateKey(cert, File.ReadAllBytes(@".\.opc\cert\godsharpopcuacert_key.pem"));
   
   buider
       .WithEndpoint(url)
@@ -295,8 +295,8 @@ Generate code for which class is customized with `ComplexObjectGenerator` attrib
   
       public UaAnsiUnion()
       {
-          TypeIdNamespace = "nsu=http://  www.unifiedautomation.com/DemoServer/;i=3006";
-          BinaryEncodingIdNamespace = "nsu=http://  www.unifiedautomation.com/DemoServer/;i=5003";
+          TypeIdNamespace = "nsu=http://www.unifiedautomation.com/DemoServer/;i=3006";
+          BinaryEncodingIdNamespace = "nsu=http://www.unifiedautomation.com/DemoServer/;i=5003";
       }
   }
   ```
