@@ -12,7 +12,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{05D086
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodSharpOpcUaClientSample", "src\GodSharpOpcUaClientSample\GodSharpOpcUaClientSample.csproj", "{60FABA2F-BBB0-4A61-B7D1-F11363FE14D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GodSharpOpcUaClientSample", "src\GodSharpOpcUaClientSample\GodSharpOpcUaClientSample.csproj", "{60FABA2F-BBB0-4A61-B7D1-F11363FE14D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{A043A5A4-FD9A-4FCE-A39F-1CAFEC766C25}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GodSharpOpcDaBenchmark", "benchmarks\GodSharpOpcDaBenchmark\GodSharpOpcDaBenchmark.csproj", "{FAA99E90-6BED-4B51-9671-20D25A23D9FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GodSharpOpcDaBenchmark.Automation", "benchmarks\GodSharpOpcDaBenchmark.Automation\GodSharpOpcDaBenchmark.Automation.csproj", "{97588EC6-5637-4F8E-B771-61A3E83FB46B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GodSharpOpcDaBenchmark.Automation.Kepware", "benchmarks\GodSharpOpcDaBenchmark.Automation.Kepware\GodSharpOpcDaBenchmark.Automation.Kepware.csproj", "{9E695F6B-F15C-400F-B4EA-AC84BCBF1279}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GodSharpOpcDaBenchmark.Automation.Graybox", "benchmarks\GodSharpOpcDaBenchmark.Automation.Graybox\GodSharpOpcDaBenchmark.Automation.Graybox.csproj", "{105C7762-A6B6-470B-B8FC-ABBB647F0107}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GodSharpOpcDaBenchmark.Shared", "benchmarks\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.shproj", "{94A08AB6-E4D5-416C-8679-0BFB0D26E6B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +40,22 @@ Global
 		{60FABA2F-BBB0-4A61-B7D1-F11363FE14D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60FABA2F-BBB0-4A61-B7D1-F11363FE14D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60FABA2F-BBB0-4A61-B7D1-F11363FE14D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA99E90-6BED-4B51-9671-20D25A23D9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA99E90-6BED-4B51-9671-20D25A23D9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA99E90-6BED-4B51-9671-20D25A23D9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA99E90-6BED-4B51-9671-20D25A23D9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97588EC6-5637-4F8E-B771-61A3E83FB46B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97588EC6-5637-4F8E-B771-61A3E83FB46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97588EC6-5637-4F8E-B771-61A3E83FB46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97588EC6-5637-4F8E-B771-61A3E83FB46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E695F6B-F15C-400F-B4EA-AC84BCBF1279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E695F6B-F15C-400F-B4EA-AC84BCBF1279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E695F6B-F15C-400F-B4EA-AC84BCBF1279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E695F6B-F15C-400F-B4EA-AC84BCBF1279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{105C7762-A6B6-470B-B8FC-ABBB647F0107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105C7762-A6B6-470B-B8FC-ABBB647F0107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105C7762-A6B6-470B-B8FC-ABBB647F0107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{105C7762-A6B6-470B-B8FC-ABBB647F0107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,8 +63,19 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{00DEC5A4-967C-455C-A1AB-42569FF5DA5C} = {586EA65A-842A-4F7C-B40B-6223CB573843}
 		{60FABA2F-BBB0-4A61-B7D1-F11363FE14D3} = {586EA65A-842A-4F7C-B40B-6223CB573843}
+		{FAA99E90-6BED-4B51-9671-20D25A23D9FD} = {A043A5A4-FD9A-4FCE-A39F-1CAFEC766C25}
+		{97588EC6-5637-4F8E-B771-61A3E83FB46B} = {A043A5A4-FD9A-4FCE-A39F-1CAFEC766C25}
+		{9E695F6B-F15C-400F-B4EA-AC84BCBF1279} = {A043A5A4-FD9A-4FCE-A39F-1CAFEC766C25}
+		{105C7762-A6B6-470B-B8FC-ABBB647F0107} = {A043A5A4-FD9A-4FCE-A39F-1CAFEC766C25}
+		{94A08AB6-E4D5-416C-8679-0BFB0D26E6B4} = {A043A5A4-FD9A-4FCE-A39F-1CAFEC766C25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D14361A1-4BFC-47C5-AE63-6891A1645FDB}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		benchmarks\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.projitems*{105c7762-a6b6-470b-b8fc-abbb647f0107}*SharedItemsImports = 5
+		benchmarks\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.projitems*{94a08ab6-e4d5-416c-8679-0bfb0d26e6b4}*SharedItemsImports = 13
+		benchmarks\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.projitems*{97588ec6-5637-4f8e-b771-61a3e83fb46b}*SharedItemsImports = 5
+		benchmarks\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.projitems*{9e695f6b-f15c-400f-b4ea-ac84bcbf1279}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

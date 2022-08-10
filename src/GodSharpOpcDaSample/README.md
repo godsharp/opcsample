@@ -6,9 +6,11 @@
 
 |Name|NuGet|MyGet|
 |---|---|---|
-| GodSharp.Opc.Da | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da) | [![MyGet](https://img.shields.io/myget/godsharplab/v/GodSharp.Opc.Da?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da) |
+| GodSharp.Opc.Da | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da) |
 | GodSharp.Opc.Da.OpcAutomation | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcAutomation?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcAutomation) | [![MyGet](https://img.shields.io/myget/godsharplab/v/GodSharp.Opc.Da.OpcAutomation?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcAutomation) |
-| GodSharp.Opc.Da.OpcNetApi | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcNetApi) | [![MyGet](https://img.shields.io/myget/godsharplab/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcNetApi) |
+| GodSharp.Opc.Da.OpcAutomation.Kepware | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcAutomation.Kepware?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcAutomation.Kepware) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da.OpcAutomation.Kepware?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcAutomation.Kepware) |
+| GodSharp.Opc.Da.OpcAutomation.Graybox | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcAutomation.Graybox?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcAutomation.Graybox) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da.OpcAutomation.Graybox?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcAutomation.Graybox) |
+| GodSharp.Opc.Da.OpcNetApi | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcNetApi) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcNetApi) |
 
 ## Introduction
 
@@ -16,6 +18,24 @@
 
   >- **OpcAutomation** : `GodSharp.Opc.Da.OpcAutomation`
   >- **OpcNetApi** : `GodSharp.Opc.Da.OpcNetApi`
+  
+### OpcAutomation
+
+- OpcAutomation
+
+  you should register `OPCDAAuto.dll`, you can download from others or /assets/da folder.
+
+- Graybox
+
+  you should register `gbda_aut.dll`, you can download from http://www.gray-box.net/download_daawrapper.php?lang=en.
+
+- Kepware
+
+  you should install `Kepware`.
+
+### OpcNetApi
+
+  you should install `OPC Core Components`, you can download from others or /assets/da folder.
 
 ## Getting Started
 
@@ -26,7 +46,8 @@
   ```
 
 ### Initial : Create opc client
-  
+  If you want to use data change event, you should set `IsSubscribed` value to `true`,default is `false`.
+
   Sample Code :
   ```
   // initial with data info
@@ -36,30 +57,32 @@
   {
       new GroupData
       {
-          Name = "default", UpdateRate = 100, ClientHandle = 010,
+          Name = "default", UpdateRate = 100, ClientHandle = 010, IsSubscribed = true,
           Tags = new List<Tag>
           {
-              new Tag("Channel1.Device1.BoolArray", 001),
-              new Tag("Channel1.Device1.Heartbeat", 010),
-              new Tag("Channel1.Device1.RunMode", 011)
+              new Tag("Test.Simulator.Booleans.B0001", 011),
+              new Tag("Test.Simulator.Numbers.N0001", 012),
+              new Tag("Test.Simulator.Characters.C0001", 013)
           }
       },
       new GroupData
       {
-          Name = "group1", UpdateRate = 100, ClientHandle = 100,
+          Name = "group1", UpdateRate = 100, ClientHandle = 100,IsSubscribed = true,
           Tags = new List<Tag>
           {
-              new Tag("Channel1.Device1.Group1.EngineCode", 100),
-              new Tag("Channel1.Device1.Group1.RackNumber", 101)
+              new Tag("Test.Simulator.Booleans.B0002", 101),
+              new Tag("Test.Simulator.Numbers.N0002", 102),
+              new Tag("Test.Simulator.Characters.C0002", 103)
           }
       },
       new GroupData
       {
-          Name = "group2", UpdateRate = 100, ClientHandle = 200,
+          Name = "group2", UpdateRate = 100, ClientHandle = 200,IsSubscribed = false,
           Tags = new List<Tag>
           {
-              new Tag("Channel1.Device1.Group2.EngineCode", 200),
-              new Tag("Channel1.Device1.Group2.RackNumber", 201)
+              new Tag("Test.Simulator.Booleans.B0003", 201),
+              new Tag("Test.Simulator.Numbers.N0003", 202),
+              new Tag("Test.Simulator.Characters.C0003", 203)
           }
       }
   };
@@ -92,10 +115,12 @@
 
 ### Add Group to Client
 
+  If you want to use data change event, you should set `IsSubscribed` value to `true`,default is `false`.
+
   ```c#
   client.Add(new Group() {Name = "default", UpdateRate = 100, ClientHandle = 010});
-  client.Add(new Group() {Name = "group1", UpdateRate = 100, ClientHandle = 100});
-  client.Add(new Group() {Name = "group2", UpdateRate = 100, ClientHandle = 200});
+  client.Add(new Group() {Name = "group1", UpdateRate = 100, ClientHandle = 100,IsSubscribed = true});
+  client.Add(new Group() {Name = "group2", UpdateRate = 100, ClientHandle = 200,IsSubscribed = false});
   ```
 
   > **Important!** 
@@ -118,6 +143,8 @@
   > *The tag `ItemName`, `ClientHandle` is unique and required.*
 
 ### Event Handles
+
+  If you want to use data change event, you should set `IsSubscribed` value to `true`,default is `false`.
 
   ```c#
   public static void OnDataChangedHandler(DataChangedOutput output)
@@ -143,7 +170,7 @@
 
 ### Read/Write Tag
 
-  See [sample code](./src/GodSharpOpcDaSample/Program.cs).
+  See [sample code](./Program.cs).
 
 ### Disconnect to Opc Server
 

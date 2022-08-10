@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation.Graybox" Version="2022.206.12" />
+  </ItemGroup>
+
+  <Import Project="..\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.projitems" Label="Shared" />
+</Project>

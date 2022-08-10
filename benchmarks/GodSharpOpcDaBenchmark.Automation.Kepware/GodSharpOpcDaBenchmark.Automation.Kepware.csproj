@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation.Kepware" Version="2022.206.12" />
+  </ItemGroup>
+  
+  <Import Project="..\GodSharpOpcDaBenchmark.Shared\GodSharpOpcDaBenchmark.Shared.projitems" Label="Shared" />
+
+</Project>

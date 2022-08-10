@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net40;net5.0;</TargetFrameworks>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>true</Prefer32Bit>
+    <TargetFrameworks>net40;net6.0;</TargetFrameworks>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation" Version="2021.207.13" />
-    <PackageReference Include="GodSharp.Opc.Da.OpcNetApi" Version="2021.207.13" />
+    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation" Version="2022.308.10" />
+    <PackageReference Include="GodSharp.Opc.Da.OpcNetApi" Version="2022.308.10" />
   </ItemGroup>
 
 </Project>

@@ -8,9 +8,11 @@
 
 |Name|NuGet|MyGet|
 |---|---|---|
-| GodSharp.Opc.Da | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da) | [![MyGet](https://img.shields.io/myget/godsharplab/v/GodSharp.Opc.Da?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da) |
+| GodSharp.Opc.Da | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da) |
 | GodSharp.Opc.Da.OpcAutomation | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcAutomation?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcAutomation) | [![MyGet](https://img.shields.io/myget/godsharplab/v/GodSharp.Opc.Da.OpcAutomation?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcAutomation) |
-| GodSharp.Opc.Da.OpcNetApi | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcNetApi) | [![MyGet](https://img.shields.io/myget/godsharplab/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcNetApi) |
+| GodSharp.Opc.Da.OpcAutomation.Kepware | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcAutomation.Kepware?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcAutomation.Kepware) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da.OpcAutomation.Kepware?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcAutomation.Kepware) |
+| GodSharp.Opc.Da.OpcAutomation.Graybox | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcAutomation.Graybox?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcAutomation.Graybox) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da.OpcAutomation.Graybox?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcAutomation.Graybox) |
+| GodSharp.Opc.Da.OpcNetApi | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Da.OpcNetApi) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Da.OpcNetApi?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Da.OpcNetApi) |
 
 ### GodSharp.Opc.Ua
 

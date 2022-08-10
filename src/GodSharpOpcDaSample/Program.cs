@@ -1,14 +1,15 @@
-﻿using System;
+﻿using GodSharp.Opc.Da;
+using GodSharp.Opc.Da.Options;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using GodSharp.Opc.Da.Options;
-using GodSharp.Opc.Da;
 
 namespace GodSharpOpcDaSample
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             /*
              * KEPware.KEPServerEx.V4
@@ -21,37 +22,39 @@ namespace GodSharpOpcDaSample
             // initial with data info
             // The group `Name`, `ClientHandle` is unique and required, `UpdateRate` is required too.
             // The tag `ItemName`, `ClientHandle` is unique and required.
-            var groups = new List<GroupData>
-            {
-                new GroupData
-                {
-                    Name = "default", UpdateRate = 100, ClientHandle = 010,
-                    Tags = new List<Tag>
-                    {
-                        new Tag("Channel1.Device1.Bool", 001),
-                        new Tag("Channel1.Device1.Heartbeat", 010),
-                        new Tag("Channel1.Device1.RunMode", 011)
-                    }
-                },
-                new GroupData
-                {
-                    Name = "group1", UpdateRate = 100, ClientHandle = 100,
-                    Tags = new List<Tag>
-                    {
-                        new Tag("Channel1.Device1.Group1.Code", 100),
-                        new Tag("Channel1.Device1.Group1.Number", 101)
-                    }
-                },
-                new GroupData
-                {
-                    Name = "group2", UpdateRate = 100, ClientHandle = 200,
-                    Tags = new List<Tag>
-                    {
-                        new Tag("Channel1.Device1.Group2.Code", 200),
-                        new Tag("Channel1.Device1.Group2.Number", 201)
-                    }
-                }
-            };
+  var groups = new List<GroupData>
+  {
+      new GroupData
+      {
+          Name = "default", UpdateRate = 100, ClientHandle = 010, IsSubscribed = true,
+          Tags = new List<Tag>
+          {
+              new Tag("Test.Simulator.Booleans.B0001", 011),
+              new Tag("Test.Simulator.Numbers.N0001", 012),
+              new Tag("Test.Simulator.Characters.C0001", 013)
+          }
+      },
+      new GroupData
+      {
+          Name = "group1", UpdateRate = 100, ClientHandle = 100,IsSubscribed = true,
+          Tags = new List<Tag>
+          {
+              new Tag("Test.Simulator.Booleans.B0002", 101),
+              new Tag("Test.Simulator.Numbers.N0002", 102),
+              new Tag("Test.Simulator.Characters.C0002", 103)
+          }
+      },
+      new GroupData
+      {
+          Name = "group2", UpdateRate = 100, ClientHandle = 200,IsSubscribed = false,
+          Tags = new List<Tag>
+          {
+              new Tag("Test.Simulator.Booleans.B0003", 201),
+              new Tag("Test.Simulator.Numbers.N0003", 202),
+              new Tag("Test.Simulator.Characters.C0003", 203)
+          }
+      }
+  };
 
             var server = new ServerData
             {
@@ -61,17 +64,17 @@ namespace GodSharpOpcDaSample
                 // if this is null,you should add group and tag manually
                 Groups = groups
             };
-            
-            var client = DaClientFactory.Instance.CreateOpcAutomationClient(new DaClientOptions(
+
+            var client = DaClientFactory.Instance.CreateOpcNetApiClient(new DaClientOptions(
                 server,
-                OnDataChangedHandler, 
+                OnDataChangedHandler,
                 OnShoutdownHandler,
-                OnAsyncReadCompletedHandler, 
+                OnAsyncReadCompletedHandler,
                 OnAsyncWriteCompletedHandler));
 
             Console.WriteLine("connect to server ...");
             client.Connect();
-            
+
             /*
              // add group and tag manual
             Console.WriteLine($"connect to server {client.Server.ProgId}:{client.Connected}");
@@ -85,7 +88,7 @@ namespace GodSharpOpcDaSample
             client.Groups["default"].Add(new Tag("Channel1.Device1.Bool", 001));
             client.Groups["default"].Add(new Tag("Channel1.Device1.Heartbeat", 010));
             client.Groups["default"].Add(new Tag("Channel1.Device1.RunMode", 011));
-            
+
             client.Groups["group1"].Add(
                 new Tag("Channel1.Device1.Group1.Code", 100),
                 new Tag("Channel1.Device1.Group1.Number", 101));
@@ -93,8 +96,8 @@ namespace GodSharpOpcDaSample
             client.Groups["group2"].Add(new Tag("Channel1.Device1.Group2.Code", 200));
             client.Groups["group2"].Add(new Tag("Channel1.Device1.Group2.Number", 201));
             */
-            
-            var props = client.GetItemProperties("Channel1.Device1.Bool");
+
+            //var props = client.GetItemProperties("Test.Simulator.Booleans.B0001");
 
             Console.WriteLine($"waitting Reads ...");
             Console.ReadLine();
