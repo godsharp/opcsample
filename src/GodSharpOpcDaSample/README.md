@@ -1,6 +1,7 @@
 # GodSharp.Opc.Da
 
-![Azure DevOps builds (main)](https://img.shields.io/azure-devops/build/godsharp/public/4/main?label=azure%20pipelines&style=flat-square)
+[![continuous](https://github.com/godsharp/opcda/actions/workflows/continuous.yml/badge.svg?branch=main)](https://github.com/godsharp/opcda/actions/workflows/continuous.yml)
+[![build](https://github.com/godsharp/opcda/actions/workflows/continuous.build.yml/badge.svg)](https://github.com/godsharp/opcda/actions/workflows/continuous.build.yml)
 
 ## Package Version
 
@@ -166,6 +167,16 @@
   public static void OnShoutdownHandler(Server server, string reason)
   {
   }
+  ```
+
+### Group Refresh
+
+Refresh tags in group when you want get all tags latest values by group `OnDataChangedHandler` event handler.
+
+  ```C#
+  client.Groups["group1"].RefreshAsync();
+  // or
+  client["group1"].RefreshAsync();
   ```
 
 ### Read/Write Tag

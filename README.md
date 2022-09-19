@@ -1,7 +1,5 @@
 # GodSharp.Opc
 
-![Azure DevOps builds (main)](https://img.shields.io/azure-devops/build/godsharp/public/4/main?label=azure%20pipelines&style=flat-square)
-
 ## Package Version
 
 ### GodSharp.Opc.Da
@@ -18,12 +16,12 @@
 
 |Name|NuGet|MyGet|
 |---|---|---|
-| GodSharp.Extensions.Opc.Ua | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Extensions.Opc.Ua?style=flat-square)](https://www.nuget.org/packages/GodSharp.Extensions.Opc.Ua) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Extensions.Opc.Ua?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Extensions.Opc.Ua) |
-| GodSharp.Extensions.Opc.Ua.Client | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Extensions.Opc.Ua.Client?style=flat-square)](https://www.nuget.org/packages/GodSharp.Extensions.Opc.Ua.Client) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Extensions.Opc.Ua.Client?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Extensions.Opc.Ua.Client) |
-| GodSharp.Extensions.Opc.Ua.Generator | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Extensions.Opc.Ua.Generator?style=flat-square)](https://www.nuget.org/packages/GodSharp.Extensions.Opc.Ua.Generator) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Extensions.Opc.Ua.Generator?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Extensions.Opc.Ua.Generator) |
-| GodSharp.Extensions.Opc.Ua.CodeGenerator | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Extensions.Opc.Ua.CodeGenerator?style=flat-square)](https://www.nuget.org/packages/GodSharp.Extensions.Opc.Ua.CodeGenerator) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Extensions.Opc.Ua.CodeGenerator?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Extensions.Opc.Ua.CodeGenerator) |
-| GodSharp.Extensions.Opc.Ua.MsBuild | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Extensions.Opc.Ua.MsBuild?style=flat-square)](https://www.nuget.org/packages/GodSharp.Extensions.Opc.Ua.MsBuild) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Extensions.Opc.Ua.MsBuild?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Extensions.Opc.Ua.MsBuild) |
+| GodSharp.Opc.Ua.Common | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Ua.Common?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Ua.Common) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Ua.Common?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Ua.Common) |
 | GodSharp.Opc.Ua.Client | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Ua.Client?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Ua.Client) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Ua.Client?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Ua.Client) |
+| GodSharp.Opc.Ua.ProxyServer | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Ua.ProxyServer?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Ua.ProxyServer) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Ua.ProxyServer?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Ua.ProxyServer) |
+| GodSharp.Opc.Ua.Server | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Ua.Server?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Ua.Server) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Ua.Server?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Ua.Server) |
+| GodSharp.Opc.Ua.Server.AspNetCore | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Ua.Server.AspNetCore?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Ua.Server.AspNetCore) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Ua.Server.AspNetCore?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Ua.Server.AspNetCore) |
+| GodSharp.Opc.Ua.ComplexTypes | [![NuGet](https://img.shields.io/nuget/v/GodSharp.Opc.Ua.ComplexTypes?style=flat-square)](https://www.nuget.org/packages/GodSharp.Opc.Ua.ComplexTypes) | [![MyGet](https://img.shields.io/myget/godsharp/v/GodSharp.Opc.Ua.ComplexTypes?style=flat-square&label=myget)](https://www.myget.org/feed/godsharp/package/nuget/GodSharp.Opc.Ua.ComplexTypes) |
 
 ## Getting Started
 
