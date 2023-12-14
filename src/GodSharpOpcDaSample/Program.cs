@@ -22,39 +22,39 @@ namespace GodSharpOpcDaSample
             // initial with data info
             // The group `Name`, `ClientHandle` is unique and required, `UpdateRate` is required too.
             // The tag `ItemName`, `ClientHandle` is unique and required.
-  var groups = new List<GroupData>
-  {
-      new GroupData
-      {
-          Name = "default", UpdateRate = 100, ClientHandle = 010, IsSubscribed = true,
-          Tags = new List<Tag>
-          {
-              new Tag("Test.Simulator.Booleans.B0001", 011),
-              new Tag("Test.Simulator.Numbers.N0001", 012),
-              new Tag("Test.Simulator.Characters.C0001", 013)
-          }
-      },
-      new GroupData
-      {
-          Name = "group1", UpdateRate = 100, ClientHandle = 100,IsSubscribed = true,
-          Tags = new List<Tag>
-          {
-              new Tag("Test.Simulator.Booleans.B0002", 101),
-              new Tag("Test.Simulator.Numbers.N0002", 102),
-              new Tag("Test.Simulator.Characters.C0002", 103)
-          }
-      },
-      new GroupData
-      {
-          Name = "group2", UpdateRate = 100, ClientHandle = 200,IsSubscribed = false,
-          Tags = new List<Tag>
-          {
-              new Tag("Test.Simulator.Booleans.B0003", 201),
-              new Tag("Test.Simulator.Numbers.N0003", 202),
-              new Tag("Test.Simulator.Characters.C0003", 203)
-          }
-      }
-  };
+            var groups = new List<GroupData>
+            {
+                new GroupData
+                {
+                    Name = "default", UpdateRate = 100, ClientHandle = 010, IsSubscribed = true,
+                    Tags = new List<Tag>
+                    {
+                        new Tag("Test.Simulator.Booleans.B0001", 011),
+                        new Tag("Test.Simulator.Numbers.N0001", 012),
+                        new Tag("Test.Simulator.Characters.C0001", 013)
+                    }
+                },
+                new GroupData
+                {
+                    Name = "group1", UpdateRate = 100, ClientHandle = 100,IsSubscribed = true,
+                    Tags = new List<Tag>
+                    {
+                        new Tag("Test.Simulator.Booleans.B0002", 101),
+                        new Tag("Test.Simulator.Numbers.N0002", 102),
+                        new Tag("Test.Simulator.Characters.C0002", 103)
+                    }
+                },
+                new GroupData
+                {
+                    Name = "group2", UpdateRate = 100, ClientHandle = 200,IsSubscribed = false,
+                    Tags = new List<Tag>
+                    {
+                        new Tag("Test.Simulator.Booleans.B0003", 201),
+                        new Tag("Test.Simulator.Numbers.N0003", 202),
+                        new Tag("Test.Simulator.Characters.C0003", 203)
+                    }
+                }
+            };
 
             var server = new ServerData
             {

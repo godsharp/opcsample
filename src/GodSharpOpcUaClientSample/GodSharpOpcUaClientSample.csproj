@@ -3,17 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GodSharp.Opc.Ua.Client" Version="2022.205.12.1" />
-    <PackageReference Include="GodSharp.Extensions.Opc.Ua.Generator" Version="2022.205.10.1" />
-    <PackageReference Include="GodSharp.Extensions.Opc.Ua.MsBuild" Version="2022.205.10.1">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="GodSharp.Opc.Ua.Client" Version="2023.412.14.1" />
     <PackageReference Include="Mapster" Version="7.3.0" />
-    <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Client.ComplexTypes" Version="1.4.368.53" />
+    <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Client.ComplexTypes" Version="1.4.371.60" />
   </ItemGroup>
 
 </Project>

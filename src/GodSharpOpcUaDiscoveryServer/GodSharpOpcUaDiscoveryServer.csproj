@@ -5,10 +5,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GodSharp.Opc.Ua.Common\GodSharp.Opc.Ua.Common.csproj" />
+    <PackageReference Include="GodSharp.Opc.Ua.Common" Version="2023.412.14" />
   </ItemGroup>
 
 </Project>

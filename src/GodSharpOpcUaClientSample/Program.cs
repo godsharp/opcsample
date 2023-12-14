@@ -1,14 +1,12 @@
-﻿using GodSharp.Extensions.Opc.Ua.Client;
-using GodSharp.Extensions.Opc.Ua.Types;
-using GodSharp.Extensions.Opc.Ua.Types.Encodings;
-using GodSharp.Extensions.Opc.Ua.Utilities;
-using GodSharp.Opc.Ua;
+﻿using GodSharp.Opc.Ua;
+using GodSharp.Opc.Ua.Client;
+using GodSharp.Opc.Ua.Client.Extensions;
 
 using Opc.Ua;
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GodSharpOpcUaClientSample
@@ -18,32 +16,13 @@ namespace GodSharpOpcUaClientSample
         private static async Task Main(string[] args)
         {
             Console.WriteLine("Hello GodSharp OpcUa Client Sample!");
-            // // register type namespace
-            EncodingFactory.Instance.RegisterTypeNamespace(
-                new TypeNamespace()
-                {
-                    Type = typeof(UaAnsiVector).AssemblyQualifiedName,
-                    TypeId = "nsu=http://www.unifiedautomation.com/DemoServer/;i=3002",
-                    BinaryEncodingId = "nsu=http://www.unifiedautomation.com/DemoServer/;i=5054"
-                }
-                //, new TypeNamespace()
-                //{
-                //    Type = $"{typeof(ProsysVector).Namespace}.{typeof(ProsysVector).Name}",
-                //    TypeId = "nsu=http://opcfoundation.org/UA/;i=18808",
-                //    BinaryEncodingId = "nsu=http://opcfoundation.org/UA/;i=18817"
-                //}
-            );
-            EncodingFactory.Instance.RegisterEncodeableTypes(typeof(UaAnsiVector), typeof(UaAnsiVector));
-            EncodingFactory.Instance.RegisterEncodeableTypes(Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly());
-            //EncodeableFactory.GlobalFactory.AddEncodeableTypes(Assembly.GetEntryAssembly());
-            EncodeableFactory.GlobalFactory.AddEncodeableType(typeof(UaAnsiVector));
-            //EncodeableFactory.GlobalFactory.AddEncodeableType(typeof(ProsysVector));
 
             var url = "opc.tcp://127.0.0.1:53530/OPCUA/SimulationServer";
             url = "opc.tcp://127.0.0.1:48020/";
             url = "opc.tcp://127.0.0.1:49320/";
-            //url = "opc.tcp://10.0.0.20:4840";
-            //url = "opc.tcp://192.168.250.1:4840";
+            url = "opc.tcp://192.168.1.11:4840";
+            url = "opc.tcp://10.0.0.20:4840";
+            url = "opc.tcp://192.168.250.1:4840";
 
             #region # - Discovery
 
@@ -92,102 +71,123 @@ namespace GodSharpOpcUaClientSample
 
             #region 0 - Initial
 
-            OpcUaClientBuider buider = new OpcUaClientBuider();
-
-            //var cert = new X509Certificate2(@"F:\Temp\.opc\cert\godsharpopcuacert.der", "123456", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.Exportable);
-
-            //var cert2 = CertificateFactory.CreateCertificateWithPEMPrivateKey(cert, File.ReadAllBytes(@"F:\Temp\.opc\cert\godsharpopcuacert_key.pem"));
-
-            buider
+            var builder = new OpcUaClientBuilder()
                 .WithEndpoint(url)
                 .WithAnonymous()
+                .WithSecurity(MessageSecurityMode.None, SecurityPolicies.None)
                 //.WithAccount("root","secret")
                 //.WithAccount("root","secret12345678")
                 //.WithCertificate(cert2)
                 //.WithSecurity(MessageSecurityMode.SignAndEncrypt,SecurityPolicies.Basic256Sha256)
                 .WithClientId("GodSharpOpcUaClientConsole");
 
-            var client = buider.Build();
+            var slim = new ManualResetEventSlim(false);
+            var connectToServerWhenBuild = false;
+            var client = await builder.BuildAsync(connectToServerWhenBuild);
+
+            client.OnSessionOpenFailureTryAgainHandle += (s, e) =>
             {
-                client.OnSessionConnectNotification = (s, t) =>
+                Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}] OnSessionOpenFailureTryAgainHandle:{s}:{e.Message}");
+            };
+            client.OnSessionConnectNotification += (s, t) =>
+            {
+                switch (t)
                 {
-                    switch (t)
-                    {
-                        case ClientSessionConnectionState.Connected:
-                            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:connected");
-                            break;
+                    case SessionConnectionState.Connected:
+                        Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:connected");
+                        slim.Set();
+                        break;
 
-                        case ClientSessionConnectionState.Reconnecting:
-                            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:reconnecting");
-                            break;
+                    case SessionConnectionState.Reconnecting:
+                        Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:reconnecting");
+                        break;
 
-                        case ClientSessionConnectionState.Disconnecting:
-                            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:disconnecting");
-                            break;
+                    case SessionConnectionState.Disconnecting:
+                        Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:disconnecting");
+                        break;
 
-                        case ClientSessionConnectionState.Disconnected:
-                            Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:disconnected");
-                            break;
+                    case SessionConnectionState.Disconnected:
+                        Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:disconnected");
+                        break;
 
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(t), t, null);
-                    }
-                };
-                client.OnSessionKeepAlive = (s, e) =>
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(t), t, null);
+                }
+            };
+            client.OnSessionKeepAlive += (s, e) =>
+            {
+                //Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:{e.CurrentState}");
+            };
+            client.OnSessionSubscriptionChanged += subscription =>
+            {
+                foreach (var item in subscription.Notifications)
                 {
-                    //Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{s.SessionName}:{e.CurrentState}");
-                };
-                client.OnSessionSubscriptionChanged = subscription =>
+                    //Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{item..SessionName}:{e.CurrentState}");
+                }
+            };
+            client.OnMonitoredItemNotification += (n, i, e) =>
+            {
+                foreach (var value in i.DequeueValues())
                 {
-                    foreach (var item in subscription.Notifications)
-                    {
-                        //Console.WriteLine($"[{DateTime.Now:HH:mm:ss.fff}]{item..SessionName}:{e.CurrentState}");
-                    }
-                };
-                client.OnMonitoredItemNotification = (n, i, e) =>
+                    Console.WriteLine("{0}->{1} : {2}, {3}, {4}", n, i.DisplayName, value.Value, value.SourceTimestamp, value.StatusCode);
+                }
+            };
+            client.OnSubscribePollingChanged += (e) =>
+            {
+                foreach (var value in e.Values)
                 {
-                    foreach (var value in i.DequeueValues())
-                    {
-                        Console.WriteLine("{0}->{1} : {2}, {3}, {4}", n, i.DisplayName, value.Value, value.SourceTimestamp, value.StatusCode);
-                    }
-                };
-            }
+                    Console.WriteLine("{0}->{1} : {2}", e.Name, value.Node.ToString(), value.Value);
+                }
+            };
 
             #endregion 0 - Initial
 
             #region 1 - StartAsync
 
             Console.WriteLine("1 - StartAsync ...");
-            bool ret = await client.StartAsync();
-            Console.WriteLine($"connect {ret}");
+            try
+            {
+                var connected = connectToServerWhenBuild ? client.Connected : client.Open();
+                Console.WriteLine($"connect {connected}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("connect failed,waiting for connect");
+                slim.Wait();
+            }
+
+            //Console.WriteLine("1.1 - ComplexTypeSystem Load ...");
+            //var complexTypeSystem = new ComplexTypeSystem(client.Session);
+            //await complexTypeSystem.Load().ConfigureAwait(false);
+            //Console.WriteLine("1.1 - ComplexTypeSystem Load");
 
             #endregion 1 - StartAsync
 
             #region 2 - Browse / BrowseTree
 
-            var _browse = true;
+            var _browse = false;
             if (_browse)
             {
                 Console.WriteLine("2 - Press any key to test Browse...");
                 Console.ReadLine();
 
-                var all = client.Session.Browse();
+                var all = client.Browse();
                 //var browse = client.Session.Browse(new NodeId("ns=4;s=Demo.Static"));
                 Console.WriteLine(" DisplayName, BrowseName, NodeClass");
                 foreach (var obj in all)
                 {
                     Console.WriteLine(" {0}, {1}, {2}", obj.DisplayName, obj.BrowseName, obj.NodeClass);
 
-                    var browse2 = client.Session.Browse((NodeId)obj.NodeId);
+                    var browse2 = client.Browse((NodeId)obj.NodeId);
                     foreach (var refd in browse2)
                     {
                         Console.WriteLine("   + {0}, {1}, {2}", refd.DisplayName, refd.BrowseName, refd.NodeClass);
                     }
                 }
 
-                // if node is too many,you should set `depth` parameter with appropriate value.
-                var tree = client.Session.BrowseTree(depth: 4);
-                //var tree = client.Session.BrowseTree(new NodeId("ns=4;s=Demo.Static"));
+                var tree = client.BrowseTree("ns=5;i=1");
+                //var tree = client.BrowseTree(new NodeId("ns=4;s=Demo.Static"));
                 Browse(tree);
 
                 static void Browse(IEnumerable<ReferenceBrowseDescription> refs, int level = -1)
@@ -195,14 +195,13 @@ namespace GodSharpOpcUaClientSample
                     level++;
                     foreach (var description in refs)
                     {
-                        Console.WriteLine("{0}{4}+{1}, {2},{3}",
+                        Console.WriteLine("{0}+{1}, {2},{3}",
                             new string('\t', level),
                             //Formatter.FormatAttributeValue(attribute.ValueId.AttributeId, attribute.Value)}
                             //description.Node.BrowseName,
                             description.GetFormatText(),
                             description.Node.NodeClass,
-                            description.Node.NodeId,
-                            level
+                            description.Node.NodeId
                         );
                         if (description.Children != null)
                         {
@@ -221,19 +220,19 @@ namespace GodSharpOpcUaClientSample
             {
                 Console.WriteLine("3 - Press any key to test GetAttributes / GetProperties ...");
                 Console.ReadLine();
-                var node = new NodeId("ns=0;i=2258"); // 2258 Server.ServerStatus.CurrentTime
-                var attributes = client.Session.GetAttributes(node);
+                var node = new NodeId("ns=5;i=1");
+                var attributes = client.GetAttributes(node);
                 foreach (var attribute in attributes)
                 {
                     Console.WriteLine($"{attribute.Name}:{attribute.ValueText}");
                 }
 
-                var properties = client.Session.GetProperties(node);
+                var properties = client.GetProperties(node);
                 if (properties != null)
                 {
                     foreach (var attribute in properties)
                     {
-                        Console.WriteLine($"{attribute.Name}:{Formatter.FormatAttributeValue(attribute.ValueId.AttributeId, attribute.Value, client.Session)}");
+                        Console.WriteLine($"{attribute.Name}:{GodSharp.Opc.Ua.Client.OpcUaHelper.FormatAttributeValue(attribute.ValueId.AttributeId, attribute.Value, client.Session)}");
                     }
                 }
             }
@@ -263,30 +262,35 @@ namespace GodSharpOpcUaClientSample
 
             #endregion 4 - Subscribe / Unsubscribe
 
-            Console.WriteLine("5 - Press any key to test read/write ...");
-            Console.ReadLine();
-            string input = null;
-            do
-            {
-                try
-                {
-                    //new OmronRunner(client).Run();
-                    //new ProsysOpcUaSimulatorRunner(client).Run();
-                    new UaAnsiCServerRunner(client).Run();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+            #region 4.1 - Subscribe Event / Unsubscribe Event
 
-                Console.WriteLine("5 - Press q key exit ...");
-                input = Console.ReadLine();
-            } while (input != "q");
+            var _event = false;
+            if (_event)
+            {
+                Console.WriteLine("Press any key to Subscribe Event");
+                Console.ReadLine();
+
+                var sub_name = "andon";
+                var subscribes = new string[] { "ns=0;i=2258", "ns=0;i=2259" };
+                // 2258 Server.ServerStatus.CurrentTime
+                // 2259 Server.ServerStatus.State
+
+                client.Subscribe(sub_name, subscribes);
+
+                Console.WriteLine("Press any key to Unsubscribe Event");
+                Console.ReadLine();
+
+                client.Unsubscribe(sub_name);
+            }
+
+            #endregion 4.1 - Subscribe Event / Unsubscribe Event
+
+            Console.WriteLine("5 - Press any key to test read/write ...");
 
             Console.WriteLine("6 - Press any key to close session...");
             Console.ReadLine();
 
-            ret = await client.StopAsync();
+            var ret = client.Close();
             Console.WriteLine($"Exit {ret}");
         }
     }

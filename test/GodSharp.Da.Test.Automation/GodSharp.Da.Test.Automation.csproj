@@ -8,8 +8,10 @@
     <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
+  <Import Project="..\GodSharp.Da.Test.Shared\GodSharp.Da.Test.Shared.projitems" Label="Shared" />
+
   <ItemGroup>
-    <PackageReference Include="GodSharp.Opc.Ua.Server" Version="2023.412.14" />
+    <PackageReference Include="GodSharp.Opc.Da.OpcAutomation" Version="2022.308.10" />
   </ItemGroup>
 
 </Project>

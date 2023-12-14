@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x86;x64;</Platforms>
+  </PropertyGroup>
+
+  <Import Project="..\GodSharp.Da.Test.Shared\GodSharp.Da.Test.Shared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <Reference Include="GodSharp.Opc.Da">
+      <HintPath>..\..\..\framework\da\output\GodSharp.Opc.Da.OpcAutomation.Graybox\netstandard2.1\GodSharp.Opc.Da.dll</HintPath>
+    </Reference>
+    <Reference Include="GodSharp.Opc.Da.OpcAutomation.Graybox">
+      <HintPath>..\..\..\framework\da\output\GodSharp.Opc.Da.OpcAutomation.Graybox\netstandard2.1\GodSharp.Opc.Da.OpcAutomation.Graybox.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
